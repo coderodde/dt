@@ -1,0 +1,28 @@
+#!/bin/bash
+
+cd
+
+if [ ! -d ".dt" ]; then
+  mkdir .dt
+fi
+
+cd .dt
+touch table
+
+TABLE_CONTENT="home $HOME"
+MAIN_SCRIPT=""
+ALIAS_MAGIC="alias dt=\". ~/.dt/dt_script\""
+
+grep -i "home" table
+ret=$?
+
+if [ $ret == 0 ]; then
+  echo "Initial tag already in the table."
+else
+  echo "Initial tag not found; appending."
+  echo "$TABLE_CONTENT" >> table
+fi
+
+echo $ALIAS_MAGIC
+
+
