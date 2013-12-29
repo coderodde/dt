@@ -19,7 +19,6 @@ Installing dt
     # Edit the '$HOME/.dt/table' - file by populating tag/path - pairs,
     # and then type something like 'dt YOUR_FAVORITE_TAG'
 
-
     # Last, but not least, reload .bashrc
     source ~/.bashrc
     
