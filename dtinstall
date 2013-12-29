@@ -33,7 +33,8 @@ if [ $ret == 0 ]; then
   echo "Function magic already in .bashrc"
 else
   echo -e "Writing function magic to .bashrc.\nPlease reload by typing '. ~/.bashrc'"
-  echo -e $FUNCTION_MAGIC >> ~/.bashrc
+  echo -e "$FUNCTION_MAGIC" >> ~/.bashrc
 fi
 
 gcc dt_engine.c -o ~/.dt/dt_engine
+echo -e "dt_engine compiled.\nInstallation succeeded!"

@@ -1,5 +1,5 @@
 function dt {
-  if [ $# -ne 1 ];
+  if [ "$#" -ne 1 ];
   then
     echo "usage dt TAG"
   else 
