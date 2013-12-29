@@ -13,6 +13,12 @@ TABLE_CONTENT="home $HOME"
 SCRIPT_MAGIC=$(cat script_magic)
 FUNCTION_MAGIC=$(cat function_magic)
 
+echo "-----------"
+echo -e $FUNCTION_MAGIC
+echo "-----------"
+echo -e $SCRIPT_MAGIC
+echo "-----------"
+
 # See whether the user has a 'home' tag.
 grep -i "home" ~/.dt/table
 ret=$?
@@ -24,9 +30,9 @@ else
   echo "$TABLE_CONTENT" >> ~/.dt/table
 fi
 
-echo -e $MAIN_SCRIPT > ~/.dt/dt_script
+echo -e "$MAIN_SCRIPT" > ~/.dt/dt_script
 
-grep "$FUNCTION_MAGIC" ~/.bashrc
+grep "function dt" ~/.bashrc
 ret=$?
 
 if [ $ret == 0 ]; then

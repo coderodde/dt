@@ -1,11 +1,13 @@
-function dt {
-  if [ "$#" -ne 1 ];
-  then
-    echo "usage dt TAG"
-  else 
-    cd $HOME/.dt
-    echo $1 > 633.directory.tagger.tag.633 # this is so ugly it is unlikely to appear anywhere.
-    . dt_script
-  fi
-}
+\n
+# The directory tagger (dt) stuff.\n
+function dt {\n
+  if [ "$#" -ne 1 ] || [ -z "$1" ];\n
+  then\n
+    echo "usage: dt TAG"\n
+  else\n
+    cd $HOME/.dt\n
+    echo "$1" > "633.directory.tagger.tag.633" # this is so ugly it is unlikely to appear anywhere.\n
+    . dt_script\n
+  fi\n
+}\n
 
