@@ -16,10 +16,14 @@ Installing dt
     ./dtinstall
     
     # The previous spell will create everything needed in '$HOME/.dt/' - directory.
-    # Edit the '$HOME/.dt/table' - file by populating tag/path - pairs,
-    # and then type something like 'dt YOUR_FAVORITE_TAG'
+    # Edit the '$HOME/.dt/table' - file by populating tag/path - pairs. For instance:
+    
+    root /
+    mybin /home/meh/bin
     
     # Last, but not least, reload .bashrc
     source ~/.bashrc
     
-    # Enjoy! :3
+    # Now you are ready to go. Type in bash "dt root" or "dt mybin" or whatever tags you may specify.
+    
+Enjoy! :3
