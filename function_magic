@@ -6,8 +6,8 @@ function dt {
     echo "usage: dt TAG"
   else
     cd $HOME/.dt
-    echo "$1" > "633.directory.tagger.tag.633" # this is so ugly it is unlikely to appear anywhere.
-    . dt_script
+    echo "$1" > "~/.dt/633.directory.tagger.tag.633" # this is so ugly it is unlikely to appear anywhere.
+    . ~/.dt/dt_script
   fi
 }
 
