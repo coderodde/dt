@@ -1,28 +1,39 @@
 #!/bin/bash
 
-cd
+OLDDIR=$(pwd)
+echo "Saving the initial directory: $OLDDIR" 
 
-if [ ! -d ".dt" ]; then
-  mkdir .dt
+if [ ! -d "~/.dt" ]; then
+  mkdir ~/.dt
 fi
 
-cd .dt
-touch table
+touch ~/.dt/table
 
 TABLE_CONTENT="home $HOME"
-MAIN_SCRIPT="if [ \$# -ne 1 ]; then\n  echo \"usage: dt TAG\"\n  exit 1\nfi\nTARGET=\$(./~/.dt/dt_engine \$1)\n. \$TARGET"
-ALIAS_MAGIC="# The following alias is created by dt (Directory tagger).\nalias dt=\". ~/.dt/dt_script\""
+SCRIPT_MAGIC=$(cat script_magic)
+FUNCTION_MAGIC=$(cat function_magic)
 
-grep -i "home" table
+# See whether the user has a 'home' tag.
+grep -i "home" ~/.dt/table
 ret=$?
 
 if [ $ret == 0 ]; then
-  echo "Initial tag already in the table."
+  echo "Initial tag 'home' already in the table."
 else
-  echo "Initial tag not found; appending."
-  echo "$TABLE_CONTENT" >> table
+  echo "Initial tag 'home' not found; appending."
+  echo "$TABLE_CONTENT" >> ~/.dt/table
 fi
 
-echo -e $MAIN_SCRIPT > dt_script
-echo -e $ALIAS_MAGIC >> ~/.bashrc
+echo -e $MAIN_SCRIPT > ~/.dt/dt_script
 
+grep "$FUNCTION_MAGIC" ~/.bashrc
+ret=$?
+
+if [ $ret == 0 ]; then
+  echo "Function magic already in .bashrc"
+else
+  echo -e "Writing function magic to .bashrc.\nPlease reload by typing '. ~/.bashrc'"
+  echo -e $FUNCTION_MAGIC >> ~/.bashrc
+fi
+
+gcc dt_engine.c -o ~/.dt/dt_engine

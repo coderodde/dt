@@ -1,0 +1,11 @@
+function dt {
+  if [ $# -ne 1 ];
+  then
+    echo "usage dt TAG"
+  else 
+    cd $HOME/.dt
+    echo $1 > 633.directory.tagger.tag.633 # this is so ugly it is unlikely to appear anywhere.
+    . dt_script
+  fi
+}
+
