@@ -1,8 +1,5 @@
 #!/bin/bash
 
-OLDDIR=$(pwd)
-echo "Saving the initial directory: $OLDDIR" 
-
 if [ ! -d "~/.dt" ]; then
   mkdir ~/.dt
 fi
@@ -30,7 +27,9 @@ else
   echo "$TABLE_CONTENT" >> ~/.dt/table
 fi
 
-echo -e "$MAIN_SCRIPT" > ~/.dt/dt_script
+echo -e "Writing main script '~/.dt/dt_script'..."
+echo -e "$SCRIPT_MAGIC" > ~/.dt/dt_script
+echo -e "Writing main script done!"
 
 grep "function dt" ~/.bashrc
 ret=$?
