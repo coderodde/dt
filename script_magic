@@ -1,9 +1,9 @@
-TAG=$(cat ~/.dt/633.directory.tagger.tag.633)
+TAG=$(cat $HOME/.dt/633.directory.tagger.tag.633)
 if [ -z "$TAG" ]; then
   echo "usage: dt TAG"
 else
   echo "Tag: $TAG"
-  TARGET=$(~/.dt/dt_engine $TAG)
+  TARGET=$($HOME/.dt/dt_engine $TAG)
   echo "Target: $TARGET"
   cd "$TARGET"
 fi
