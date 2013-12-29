@@ -41,5 +41,15 @@ else
   echo -e "$FUNCTION_MAGIC" >> ~/.bashrc
 fi
 
+grep "function dt" ~/.bash_profile
+ret=$?
+
+if [ $ret == 0 ]; then
+  echo "Function magic already in .bash_profile"
+else
+  echo -e "Writing function magic to .bash_profile."
+  echo -e "$FUNCTION_MAGIC" >> ~/.bash_profile
+fi
+
 gcc dt_engine.c -o ~/.dt/dt_engine
 echo -e "dt_engine compiled.\nInstallation succeeded!"
