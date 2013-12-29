@@ -18,3 +18,9 @@ Installing dt
     # The previous spell will create everything needed in '$HOME/.dt/' - directory.
     # Edit the '$HOME/.dt/table' - file by populating tag/path - pairs,
     # and then type something like 'dt YOUR_FAVORITE_TAG'
+
+
+    # Last, but not least, reload .bashrc
+    source ~/.bashrc
+    
+    # Enjoy! :3
