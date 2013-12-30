@@ -9,6 +9,7 @@
 #define TABLE_FILE     "/table"
 #define MAX_TAG_LENGTH 32
 #define MIN(x,y) ((x) < (y) ? (x) : (y))
+#define DEFAULT_DISTANCE 2
 
 static int lev_distance_impl(const char* a, const char* b, int i, int j) {
   if (i == 0) {
@@ -43,7 +44,7 @@ int main (int argc, const char * argv[]) {
 	int tmpint;
   int mindist = 1000 * 1000 * 1000;
   int tmpdist;
-  int max_allowed_dist = 4;
+  int max_allowed_dist = DEFAULT_DISTANCE;
   char* bestpath[FILENAME_MAX];
 	FILE* f;
 	char* home;
@@ -94,7 +95,7 @@ int main (int argc, const char * argv[]) {
     }
   }
 
-  // If here, no exact match.
+  /* If here, no exact match. */
   if (mindist <= max_allowed_dist) {
     puts(bestpath);
   }

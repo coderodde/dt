@@ -10,12 +10,6 @@ TABLE_CONTENT="home $HOME"
 SCRIPT_MAGIC=$(cat script_magic)
 FUNCTION_MAGIC=$(cat function_magic)
 
-echo "-----------"
-echo -e $FUNCTION_MAGIC
-echo "-----------"
-echo -e $SCRIPT_MAGIC
-echo "-----------"
-
 # See whether the user has a 'home' tag.
 grep -i "home" ~/.dt/table
 ret=$?
@@ -51,5 +45,3 @@ else
   echo -e "$FUNCTION_MAGIC" >> ~/.bash_profile
 fi
 
-gcc -std=c89 dt_engine.c -o ~/.dt/dt_engine
-echo -e "dt_engine compiled.\nInstallation succeeded!"
