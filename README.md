@@ -27,3 +27,13 @@ Installing dt
     # Now you are ready to go. Type in bash "dt root" or "dt mybin" or whatever tags you may specify.
     
 Enjoy! :3
+
+What's new?
+-----------
+
+Added Levenshtein distance support in order to do approximate tag matching.
+
+Limitations
+-----------
+
+In the ~/.dt/table file, all paths must be absolute, so no '~'-characters for now. I will do a workaround for this soon enough.
