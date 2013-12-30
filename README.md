@@ -12,8 +12,8 @@ Installing dt
     # ... or alternatively load the zip file in case you don't have git
     ???
     
-    # Now run this:
-    ./dtinstall
+    # Now run this from the directory containing dt files:
+    make
     
     # The previous spell will create everything needed in '$HOME/.dt/' - directory.
     # Edit the '$HOME/.dt/table' - file by populating tag/path - pairs. For instance:
