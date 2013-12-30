@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -7,6 +8,7 @@
 #define DTHOME         "/.dt"
 #define TABLE_FILE     "/table"
 #define MAX_TAG_LENGTH 32
+#define MIN(x,y) ((x) < (y) ? (x) : (y))
 
 static int lev_distance_impl(const char* a, const char* b, int i, int j) {
   if (i == 0) {
@@ -23,6 +25,14 @@ static int lev_distance_impl(const char* a, const char* b, int i, int j) {
                  lev_distance_impl(a, b, i, j - 1) + 1),
              lev_distance_impl(a, b, i - 1, j - 1) +
                  (a[i - 1] != b[j - 1] ? 1 : 0));
+}
+
+void lower(char* a) {
+  int i;
+
+  for (i = 0; a[i]; ++i) {
+    a[i] = tolower(a[i]);
+  }
 }
 
 int lev_distance(const char* a, const char* b) {
@@ -65,12 +75,16 @@ int main (int argc, const char * argv[]) {
 		return EXIT_FAILURE;
 	}
 	
+  lower(argv[1]);
+
 	while (!feof(f)
 		   && !ferror(f)
 		   && (tmpint = fscanf(f,
                            "%s %s\n",
                            tag,
                            file_path)) != EOF) {
+    lower(tag);
+
     if (strcmp(tag, argv[1]) == 0) {
       puts(file_path);
       return EXIT_SUCCESS;

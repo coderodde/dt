@@ -51,5 +51,5 @@ else
   echo -e "$FUNCTION_MAGIC" >> ~/.bash_profile
 fi
 
-gcc dt_engine.c -o ~/.dt/dt_engine
+gcc -std=c89 dt_engine.c -o ~/.dt/dt_engine
 echo -e "dt_engine compiled.\nInstallation succeeded!"
