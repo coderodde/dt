@@ -5,11 +5,12 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#define DTHOME         "/.dt"
-#define TABLE_FILE     "/table"
-#define MAX_TAG_LENGTH 32
-#define MIN(x,y) ((x) < (y) ? (x) : (y))
-#define DEFAULT_DISTANCE 2
+#define DTHOME               "/.dt"
+#define TABLE_FILE           "/table"
+#define MAX_TAG_LENGTH       32
+#define MAX_TAG_LENGTH_STR   "32"
+#define MIN(x,y)             ((x) < (y) ? (x) : (y))
+#define DEFAULT_MAX_DISTANCE 2
 
 static int lev_distance_impl(const char* a, const char* b, int i, int j) {
   if (i == 0) {
@@ -44,13 +45,14 @@ int main (int argc, const char * argv[]) {
 	int tmpint;
   int mindist = 1000 * 1000 * 1000;
   int tmpdist;
-  int max_allowed_dist = DEFAULT_DISTANCE;
-  char* bestpath[FILENAME_MAX];
+  int max_allowed_dist = DEFAULT_MAX_DISTANCE;
+  char bestpath[FILENAME_MAX];
 	FILE* f;
 	char* home;
 	char tag[MAX_TAG_LENGTH + 1];
 	char file_path[FILENAME_MAX];
-	
+  char arg_tag[MAX_TAG_LENGTH + 1];
+  	
 	if (argc != 2) {
 		return EXIT_FAILURE;
 	}
@@ -76,12 +78,13 @@ int main (int argc, const char * argv[]) {
 		return EXIT_FAILURE;
 	}
 	
-  lower(argv[1]);
+  strncpy(arg_tag, argv[1], MAX_TAG_LENGTH);
+  lower(arg_tag);
 
 	while (!feof(f)
 		   && !ferror(f)
 		   && (tmpint = fscanf(f,
-                           "%s %s\n",
+                           "%32" MAX_TAG_LENGTH_STR "s %s\n",
                            tag,
                            file_path)) != EOF) {
     lower(tag);

@@ -1,8 +1,6 @@
 #!/bin/bash
 
-if [ ! -d "~/.dt" ]; then
-  mkdir ~/.dt
-fi
+mkdir ~/.dt 2> /dev/null
 
 touch ~/.dt/table
 
@@ -11,7 +9,7 @@ SCRIPT_MAGIC=$(cat script_magic)
 FUNCTION_MAGIC=$(cat function_magic)
 
 # See whether the user has a 'home' tag.
-grep -i "home" ~/.dt/table
+grep -i "home " $HOME/.dt/table > /dev/null
 ret=$?
 
 if [ $ret == 0 ]; then
@@ -25,7 +23,7 @@ echo -e "Writing main script '~/.dt/dt_script'..."
 echo -e "$SCRIPT_MAGIC" > ~/.dt/dt_script
 echo -e "Writing main script done!"
 
-grep "function dt" ~/.bashrc
+grep "function dt" ~/.bashrc > /dev/null
 ret=$?
 
 if [ $ret == 0 ]; then
@@ -35,7 +33,7 @@ else
   echo -e "$FUNCTION_MAGIC" >> ~/.bashrc
 fi
 
-grep "function dt" ~/.bash_profile
+grep "function dt" ~/.bash_profile > /dev/null
 ret=$?
 
 if [ $ret == 0 ]; then
