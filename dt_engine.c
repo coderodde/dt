@@ -31,8 +31,12 @@ int lev_distance(const char* a, const char* b) {
 
 int main (int argc, const char * argv[]) {
 	int tmpint;
+  int mindist = 1000 * 1000 * 1000;
+  int tmpdist;
+  int max_allowed_dist = 4;
+  char* bestpath[FILENAME_MAX];
 	FILE* f;
-	char * home;
+	char* home;
 	char tag[MAX_TAG_LENGTH + 1];
 	char file_path[FILENAME_MAX];
 	
@@ -69,10 +73,18 @@ int main (int argc, const char * argv[]) {
                            file_path)) != EOF) {
     if (strcmp(tag, argv[1]) == 0) {
       puts(file_path);
-      break;
+      return EXIT_SUCCESS;
+    } else if (mindist > (tmpdist = lev_distance(tag, argv[1]))) {
+      mindist = tmpdist;
+      strcpy(bestpath, file_path);
     }
   }
-	
+
+  // If here, no exact match.
+  if (mindist <= max_allowed_dist) {
+    puts(bestpath);
+  }
+
 	fclose(f);
 	return EXIT_SUCCESS;
 }
