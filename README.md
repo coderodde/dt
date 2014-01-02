@@ -31,8 +31,8 @@ Enjoy! :3
 What's new?
 -----------
 
-Added Levenshtein distance support in order to do approximate tag matching.
-Now you can use '~' as to denote you home directory.
+* Added Levenshtein distance support in order to do approximate tag matching.
+* Now you can use '~' as to denote you home directory.
 
 Limitations
 -----------
