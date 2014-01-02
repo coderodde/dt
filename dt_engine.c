@@ -29,7 +29,11 @@ static int lev_distance_impl(const char* a, const char* b, int i, int j) {
                  (a[i - 1] != b[j - 1] ? 1 : 0));
 }
 
-void lower(char* a) {
+static int lev_distance(const char* a, const char* b) {
+  return lev_distance_impl(a, b, strlen(a), strlen(b));
+}
+
+static void lower(char* a) {
   int i;
 
   for (i = 0; a[i]; ++i) {
@@ -37,12 +41,16 @@ void lower(char* a) {
   }
 }
 
-int lev_distance(const char* a, const char* b) {
-  return lev_distance_impl(a, b, strlen(a), strlen(b));
+static char* expand_tilde() {
+  char* buffer = (char*) malloc(sizeof(char) * FILENAME_MAX);
+  strncpy(buffer, getenv("HOME"), FILENAME_MAX - 1);
+  return buffer;
 }
 
 int main (int argc, const char * argv[]) {
-	int tmpint;
+	int i;
+  int sz;
+  int tmpint;
   int mindist = 1000 * 1000 * 1000;
   int tmpdist;
   int max_allowed_dist = DEFAULT_MAX_DISTANCE;
@@ -52,7 +60,8 @@ int main (int argc, const char * argv[]) {
 	char tag[MAX_TAG_LENGTH + 1];
 	char file_path[FILENAME_MAX];
   char arg_tag[MAX_TAG_LENGTH + 1];
-  	
+  char* tilde;
+
 	if (argc != 2) {
 		return EXIT_FAILURE;
 	}
@@ -84,15 +93,36 @@ int main (int argc, const char * argv[]) {
 	while (!feof(f)
 		   && !ferror(f)
 		   && (tmpint = fscanf(f,
-                           "%32" MAX_TAG_LENGTH_STR "s %s\n",
+                           "%" MAX_TAG_LENGTH_STR "s %s\n",
                            tag,
                            file_path)) != EOF) {
     lower(tag);
 
-    if (strcmp(tag, argv[1]) == 0) {
+    if (file_path[0] == '~') {
+      tilde = expand_tilde();
+      sz = strlen(tilde);
+      
+      if (file_path[1] == '/') {
+        for (i = strlen(file_path); i > 0; --i) {
+          file_path[sz + i - 1] = file_path[i];
+        }
+
+        for (i = 0; i < sz; ++i) {
+          file_path[i] = tilde[i];
+        }
+      } else {
+        file_path[sz] = '\0';
+      }
+
+      for (i = 0; i < sz; i++) {
+        file_path[i] = tilde[i];
+      }
+    }
+
+    if (strcmp(tag, arg_tag) == 0) {
       puts(file_path);
       return EXIT_SUCCESS;
-    } else if (mindist > (tmpdist = lev_distance(tag, argv[1]))) {
+    } else if (mindist > (tmpdist = lev_distance(tag, arg_tag))) {
       mindist = tmpdist;
       strcpy(bestpath, file_path);
     }
