@@ -31,9 +31,10 @@ Enjoy! :3
 What's new?
 -----------
 
-Added Levenshtein distance support in order to do approximate tag matching.
+* Added Levenshtein distance support in order to do approximate tag matching.
+* Now you can use '~' as to denote you home directory.
 
 Limitations
 -----------
 
-In the ~/.dt/table file, all paths must be absolute, so no '~'-characters for now. I will do a workaround for this soon enough.
+In the ~/.dt/table file, all paths must be absolute, so no '~'-characters for now. I will do a workaround for this soon enough. (Done! See above.)
