@@ -30,12 +30,18 @@ function dt {
       if [ "$#" -ne 2 ]; then
         echo "Usage: dt -p | --print PATTERN"
       else
-        grep -i $1
+        grep -i "^[[:space:]]*$2" ~/.dt/table
       fi
 
     elif [ $1 = "-r" ] || [ $1 = "--remove" ]; then
       
-      echo "Removing.."
+      for arg in "$@"
+      do
+        if [ $arg != $1 ]; then
+          echo "Removing $arg"
+          sed -i "/^[ ]*$arg/d" ~/.dt/table
+        fi
+      done
     
     else
 
