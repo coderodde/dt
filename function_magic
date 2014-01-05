@@ -1,36 +1,54 @@
 
 # The directory tagger (dt) stuff.
 function dt {
-  if [ "$#" = "3" ]; then
-    if [ $1 = "-a" ]; then
-      echo "Adding..."
-      echo "$2 $3" >> ~/.dt/table
+  if [ "$#" -gt 0 ]; then
+    if [ $1 = "-h" ] || [ $1 = "--help" ]; then
+      
+      echo "Usage: dt [OPTIONS] TAG [PATH]"
+      echo "Options:"
+      echo "  -a, --append TAG PATH Creates a new tag TAG pointing to PATH."
+      echo "  -p, --print  PATTERN  Searches for tags matching the pattern."
+      echo "  -r, --remove TAG1 ... TAGN Removes tags."
+      echo "  -h, --help   print this text and exit."
+      echo "  -v, --version print teh version and exit."
+
+    elif [ $1 = "-v" ] || [ $1 = "--version" ]; then
+
+      echo "dt 0.1.0"
+    
+    elif [ $1 = "-a" ] || [ $1 = "--append" ]; then
+      
+      if [ "$#" -ne 3 ]; then
+        echo "Usage: dt -a | --append TAG PATH"
+      else
+        echo "$2 $3" >> ~/.dt/table
+        echo "$2 maps to $3"
+      fi
+    
+    elif [ $1 = "-p" ] || [ $1 = "--print" ]; then
+
+      if [ "$#" -ne 2 ]; then
+        echo "Usage: dt -p | --print PATTERN"
+      else
+        grep -i $1
+      fi
+
+    elif [ $1 = "-r" ] || [ $1 = "--remove" ]; then
+      
+      echo "Removing.."
+    
     else
-      echo "usage: dt -a TAG PATH"
-    fi
-  elif [ $# = "2" ]; then
-    if [ $1 = "-p" ]; then
-      echo "Printing..."
-    elif [ $1 = "-r" ]; then
-      echo "Removing..."
-    else
-      echo "usage: dt -r TAG"
-    fi
-  elif [ $# = "1" ]; then
-    if [ -z $1 ]; then
-      echo "Tag is missing. \nusage: dt TAG"
-    else 
+
+      # Do switch
       echo $1 > ~/.dt/633.directory.tagger.tag.633
       . ~/.dt/dt_script
     fi
-  fi
+  
+  else
 
-#  if [ "$#" -ne 1 ] || [ -z "$1" ];
-#  then
-#    echo "usage: dt TAG"
-#  elsif [  ]; then
-#    echo "$1" > "$HOME/.dt/633.directory.tagger.tag.633" # this is so ugly it is unlikely to appear anywhere.
-#    . $HOME/.dt/dt_script
-#  fi
+    # Going back to previous directory.
+    echo "Going back."
+  
+  fi
 }
 
