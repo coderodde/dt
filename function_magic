@@ -1,24 +1,27 @@
 
 # The directory tagger (dt) stuff.
 function dt {
-  if [ $# = 3 ]; then
+  if [ "$#" = "3" ]; then
     if [ $1 = "-a" ]; then
       echo "Adding..."
+      echo "$2 $3" >> ~/.dt/table
     else
       echo "usage: dt -a TAG PATH"
     fi
-  elsif [ $# = 2 ]; then
-    if [ $1 = "-r" ]; then
+  elif [ $# = "2" ]; then
+    if [ $1 = "-p" ]; then
+      echo "Printing..."
+    elif [ $1 = "-r" ]; then
       echo "Removing..."
     else
       echo "usage: dt -r TAG"
     fi
-  elsif [ $# = 1 ]; then
+  elif [ $# = "1" ]; then
     if [ -z $1 ]; then
       echo "Tag is missing. \nusage: dt TAG"
     else 
       echo $1 > ~/.dt/633.directory.tagger.tag.633
-      . ~/.dt.dt_script
+      . ~/.dt/dt_script
     fi
   fi
 
