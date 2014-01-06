@@ -14,7 +14,7 @@ function dt {
 
     elif [ $1 = "-v" ] || [ $1 = "--version" ]; then
 
-      echo "dt 0.1.0"
+      echo "dt 0.1.1"
     
     elif [ $1 = "-a" ] || [ $1 = "--append" ]; then
       
@@ -27,22 +27,28 @@ function dt {
     
     elif [ $1 = "-p" ] || [ $1 = "--print" ]; then
 
-      if [ "$#" -ne 2 ]; then
-        echo "Usage: dt -p | --print PATTERN"
+      if [ $# -eq 1 ]; then
+        # Print all non-empty lines of the table file.
+        grep -v '^[[:space:]]*$' ~/.dt/table
+      elif [ $# -eq 2 ]; then
+        grep -i "^[[:space:]]*[[:alnum:]]*"$2 ~/.dt/table
       else
-        grep -i "^[[:space:]]*$2" ~/.dt/table
+        echo "Usage: dt -p | --print [PATTERN]"
       fi
 
     elif [ $1 = "-r" ] || [ $1 = "--remove" ]; then
-      
-      for arg in "$@"
-      do
-        if [ $arg != $1 ]; then
-          echo "Removing $arg"
-          sed -i "/^[ ]*$arg/d" ~/.dt/table
-        fi
-      done
-    
+     
+      if [ $# -lt 2 ]; then
+        echo "Usage: dt -r | --remove TAG1 ... TAGN"
+      else 
+        for arg in "$@"
+        do
+          if [ $arg != $1 ]; then
+            echo "Removing $arg"
+            sed -i "/^[ ]*$arg/d" ~/.dt/table
+          fi
+        done
+      fi
     else
 
       # Do switch
@@ -57,4 +63,3 @@ function dt {
   
   fi
 }
-
