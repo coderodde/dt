@@ -12,7 +12,7 @@
 #define MIN(x,y)             ((x) < (y) ? (x) : (y))
 #define DEFAULT_MAX_DISTANCE 2
 
-static const char *const TOO_LONG_TAG =
+static char *const TOO_LONG_TAG =
 "tag is longer than " MAX_TAG_LENGTH_STR " characters";
 
 static int 
@@ -91,7 +91,8 @@ split_line(char* line)
     /* No room for the path. */
     return NULL;
 
-  i3 = i2 + 1;
+  i3 = i2;
+  i2--;
 
   while (i3 < sz && isspace(line[i3]))
     i3++;
@@ -195,7 +196,6 @@ int main (int argc, const char * argv[]) {
       {
       fprintf(stderr, "'%s': tag is too long.", pair[0]);
       free(pair[0]);
-      free(pair[1]);
       free(pair);
       continue;
       }
@@ -241,7 +241,6 @@ int main (int argc, const char * argv[]) {
     } else if (mindist > (tmpdist = lev_distance(tag, arg_tag))) {
       mindist = tmpdist;
       strcpy(bestpath, file_path);
-
     }
   }
 
