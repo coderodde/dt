@@ -1,5 +1,11 @@
 
 # The directory tagger (dt) stuff.
+function remove_tag {
+  if [ $# -eq 1 ]; then
+    sed -i "/^[ ]*$1/d" ~/.dt/table
+  fi
+}
+
 function dt {
   if [ "$#" -gt 0 ]; then
     if [ $1 = "-h" ] || [ $1 = "--help" ]; then
@@ -44,8 +50,8 @@ function dt {
         for arg in "$@"
         do
           if [ $arg != $1 ]; then
-            echo "Removing $arg"
-            sed -i "/^[ ]*$arg/d" ~/.dt/table
+            echo "Removing $arg!"
+            remove_tag $1
           fi
         done
       fi
@@ -58,8 +64,11 @@ function dt {
   
   else
 
-    # Going back to previous directory.
-    echo "Going back."
+    SAVE_DIR=$(pwd)
+    echo "prev" > ~/.dt/633.directory.tagger.tag.633
+    . ~/.dt/dt_script
+    remove_tag "prev"
+    echo "prev $SAVE_DIR" >> ~/.dt/table
   
   fi
 }
