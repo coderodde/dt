@@ -37,7 +37,7 @@ Installing dt
     # or..
     add --remove bin
     
-    # Now you are ready to go. Type in bash "dt root" or "dt mybin" or whatever tags you may specify.
+    # Now you are ready to go. Type in bash "dt root" or "dt mybin" or whatever tags you may have specified.
     
 Enjoy! :3
 
