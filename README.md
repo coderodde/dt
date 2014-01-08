@@ -15,14 +15,27 @@ Installing dt
     # Now run this from the directory containing dt files:
     make
     
+    # Reload:
+    source ~/.bashrc
+    
     # The previous spell will create everything needed in '$HOME/.dt/' - directory.
     # Edit the '$HOME/.dt/table' - file by populating tag/path - pairs. For instance:
     
     root /
     mybin /home/meh/bin
     
-    # Last, but not least, reload .bashrc
-    source ~/.bashrc
+    # There is no need for hacking directly into table file. Use these:
+    add -a bin /usr/bin
+    # or..
+    add --append bin /usr/bin
+    
+    add -p [REGEX]
+    # or..
+    add --print [REGEX]
+    
+    add -r bin
+    # or..
+    add --remove bin
     
     # Now you are ready to go. Type in bash "dt root" or "dt mybin" or whatever tags you may specify.
     
