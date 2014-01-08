@@ -10,12 +10,12 @@ function dt {
   if [ "$#" -gt 0 ]; then
     if [ $1 = "-h" ] || [ $1 = "--help" ]; then
       
-      echo "Usage: dt [OPTIONS] TAG [PATH]"
+      echo "Usage: dt [OPTIONS] [TAG [PATH]]"
       echo "Options:"
-      echo "  -a, --append TAG PATH Creates a new tag TAG pointing to PATH."
-      echo "  -p, --print  PATTERN  Searches for tags matching the pattern."
-      echo "  -r, --remove TAG1 ... TAGN Removes tags."
-      echo "  -h, --help   print this text and exit."
+      echo "  -a, --append  TAG PATH Creates a new tag TAG pointing to PATH."
+      echo "  -p, --print   PATTERN  Searches for tags matching the pattern."
+      echo "  -r, --remove  TAG1 ... TAGN Removes tags."
+      echo "  -h, --help    print this text and exit."
       echo "  -v, --version print teh version and exit."
 
     elif [ $1 = "-v" ] || [ $1 = "--version" ]; then
