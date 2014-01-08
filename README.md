@@ -33,6 +33,7 @@ What's new?
 
 * Added Levenshtein distance support in order to do approximate tag matching.
 * Now you can use '~' as to denote you home directory.
+* There is a command line API for adding, listing and removing tags + ping pong between 2 directories.
 
 Limitations
 -----------
