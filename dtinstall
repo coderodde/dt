@@ -3,10 +3,10 @@
 mkdir ~/.dt 2> /dev/null
 
 touch ~/.dt/table
+cp function_magic ~/.dt
 
 TABLE_CONTENT="home $HOME"
 SCRIPT_MAGIC=$(cat script_magic)
-FUNCTION_MAGIC=$(cat function_magic)
 
 # See whether the user has a 'home' tag.
 grep -i "home " $HOME/.dt/table > /dev/null
@@ -23,23 +23,23 @@ echo -e "Writing main script '~/.dt/dt_script'..."
 echo -e "$SCRIPT_MAGIC" > ~/.dt/dt_script
 echo -e "Writing main script done!"
 
-grep "function dt" ~/.bashrc > /dev/null
+grep "function_magic" ~/.bashrc > /dev/null
 ret=$?
 
 if [ $ret == 0 ]; then
   echo "Function magic already in .bashrc"
 else
   echo -e "Writing function magic to .bashrc.\nPlease reload by typing '. ~/.bashrc'"
-  echo -e "$FUNCTION_MAGIC" >> ~/.bashrc
+  echo -e "source $HOME/.dt/function_magic" >> ~/.bashrc
 fi
 
-grep "function dt" ~/.bash_profile > /dev/null
+grep "function_magic" ~/.bash_profile > /dev/null
 ret=$?
 
 if [ $ret == 0 ]; then
   echo "Function magic already in .bash_profile"
 else
   echo -e "Writing function magic to .bash_profile."
-  echo -e "$FUNCTION_MAGIC" >> ~/.bash_profile
+  echo -e "source $HOME/.dt/function_magic" >> ~/.bash_profile
 fi
 
